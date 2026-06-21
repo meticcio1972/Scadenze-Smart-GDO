@@ -1,0 +1,76 @@
+document.getElementById("csvFile").addEventListener("change", function(e){
+
+const file = e.target.files[0];
+
+if(!file) return;
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+const testo = event.target.result;
+
+const righe = testo.split("\n");
+
+prodotti=[];
+
+let cnt3=0;
+let cnt7=0;
+let cnt10=0;
+let cnt15=0;
+
+for(let i=1;i<righe.length;i++){
+
+const colonne = righe[i].trim().split(";");
+
+if(colonne.length<3) continue;
+
+const codice = colonne[0].trim();
+const descrizione = colonne[1].trim();
+const dataStr = colonne[2].trim();
+
+const parti = dataStr.split("/");
+
+if(parti.length!==3) continue;
+
+const dataScad = new Date(
+parti[2],
+parti[1]-1,
+parti[0]
+);
+
+const oggi = new Date();
+
+oggi.setHours(0,0,0,0);
+
+const giorni = Math.ceil(
+(dataScad-oggi)/(1000*60*60*24)
+);
+
+prodotti.push({
+codice,
+descrizione,
+scadenza:dataStr,
+giorni
+});
+
+if(giorni<=3) cnt3++;
+if(giorni<=7) cnt7++;
+if(giorni<=10) cnt10++;
+if(giorni<=15) cnt15++;
+
+}
+
+document.getElementById("d3").innerText=cnt3;
+document.getElementById("d7").innerText=cnt7;
+document.getElementById("d10").innerText=cnt10;
+document.getElementById("d15").innerText=cnt15;
+document.getElementById("totale").innerText=prodotti.length;
+
+mostraProdotti();
+
+};
+
+reader.readAsText(file);
+
+});
