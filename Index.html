@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scadenze Smart GDO</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+padding:15px;
+margin:0;
+}
+
+h1{
+text-align:center;
+}
+
+.card{
+background:white;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+box-shadow:0 1px 5px rgba(0,0,0,.1);
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.box{
+padding:12px;
+border-radius:8px;
+color:white;
+font-weight:bold;
+text-align:center;
+}
+
+.red{background:#e53935;}
+.orange{background:#fb8c00;}
+.yellow{background:#fdd835;color:black;}
+.green{background:#43a047;}
+.blue{background:#1e88e5;}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+box-sizing:border-box;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Scadenze Smart GDO</h1>
+
+<div class="card">
+
+<input type="file" id="csvFile">
+
+</div>
+
+<div class="dashboard">
+
+<div class="box red">
+🔴<br>
+3 Giorni<br>
+<span id="d3">0</span>
+</div>
+
+<div class="box orange">
+🟠<br>
+7 Giorni<br>
+<span id="d7">0</span>
+</div>
+
+<div class="box yellow">
+🟡<br>
+10 Giorni<br>
+<span id="d10">0</span>
+</div>
+
+<div class="box green">
+🟢<br>
+15 Giorni<br>
+<span id="d15">0</span>
+</div>
+
+<div class="box blue">
+📦<br>
+Referenze<br>
+<span id="totale">0</span>
+</div>
+
+</div>
+
+<div class="card">
+
+<input
+type="text"
+id="ricerca"
+placeholder="Cerca prodotto..."
+>
+
+</div>
+
+<div id="lista"></div>
+
+<script>
+
+let prodotti=[];
+
+document
+.getElementById("ricerca")
+.addEventListener("input",mostraProdotti);
+
+function mostraProdotti(){
+
+const ricerca=
+document
+.getElementById("ricerca")
+.value
+.toLowerCase();
+
+let html="";
+
+prodotti
+.filter(p =>
+p.descrizione.toLowerCase().includes(ricerca)
+||
+p.codice.toLowerCase().includes(ricerca)
+)
+.forEach(p=>{
+
+html+=`
+<div class="card">
+
+<b>${p.descrizione}</b><br>
+
+Codice: ${p.codice}<br>
+
+Scadenza: ${p.scadenza}
+
+</div>
+`;
+
+});
+
+document.getElementById("lista").innerHTML=html;
+
+}
+
+</script>
+
+</body>
+</html>
