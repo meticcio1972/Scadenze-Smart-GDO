@@ -1,0 +1,61 @@
+let prodotti = [];
+let filtroAttivo = "tutti";
+
+function renderLista(lista) {
+  const contenitore = document.getElementById("listaProdotti");
+
+  if (!lista.length) {
+    contenitore.innerHTML = "<p>Nessun prodotto trovato</p>";
+    return;
+  }
+
+  contenitore.innerHTML = lista.map(p => `
+    <div class="cardProdotto">
+      <h3>${p.descrizione}</h3>
+      <p><strong>Codice:</strong> ${p.codice}</p>
+      <p><strong>Scadenza:</strong> ${p.data}</p>
+      <p><strong>Pezzi:</strong> ${p.pezzi}</p>
+      <p><strong>Offerta:</strong> ${p.offerta}</p>
+      <p><strong>Giorni:</strong> ${p.giorni}</p>
+    </div>
+  `).join("");
+}
+document.getElementById("csvFile").addEventListener("change", function(e){
+
+  const file = e.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(event){
+
+    const testo = event.target.result;
+
+    const righe = testo.split("\n");
+
+    prodotti = [];
+
+    for(let i=1;i<righe.length;i++){
+
+      const colonne = righe[i].trim().split(";");
+
+      if(colonne.length < 3) continue;
+
+      prodotti.push({
+        codice: colonne[0] || "",
+        descrizione: colonne[1] || "",
+        data: colonne[2] || "",
+        pezzi: colonne[3] || "",
+        offerta: colonne[4] || ""
+      });
+
+    }
+
+    renderLista(prodotti);
+
+  };
+
+  reader.readAsText(file);
+
+});
