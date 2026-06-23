@@ -1,6 +1,9 @@
 alert("APP JS CARICATO");
 let prodotti = [];
 let storicoModifiche = {};
+let scadenzeModificate =
+JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
+
 function mostraProdotti(lista) {
 
     const contenuto = document.getElementById("contenuto");
@@ -64,7 +67,12 @@ alert("RIGHE: " + righe.length);
             const codice = colonne[0].trim();
             const descrizione = colonne[1].trim();
             const dataStr = colonne[2].trim();
+            let dataStr = colonne[2].trim();
 
+if(scadenzeModificate[codice]){
+    dataStr = scadenzeModificate[codice];
+}
+            
             const parti = dataStr.split("/");
 
             if(parti.length !== 3) continue;
@@ -169,6 +177,12 @@ storicoModifiche[codice].push({
 });
 
 prodotto.scadenza = nuovaData;
+    scadenzeModificate[codice] = nuovaData;
+
+localStorage.setItem(
+    "scadenzeModificate",
+    JSON.stringify(scadenzeModificate)
+);
 
     const parti = nuovaData.split("/");
 
