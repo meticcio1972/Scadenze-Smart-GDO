@@ -156,7 +156,20 @@ function modificaScadenza(codice){
 
     if(!nuovaData) return;
 
-    prodotto.scadenza = nuovaData;
+    const vecchiaData = prodotto.scadenza;
+
+if(!storicoModifiche[codice]){
+    storicoModifiche[codice] = [];
+}
+
+storicoModifiche[codice].push({
+    vecchia: vecchiaData,
+    nuova: nuovaData,
+    dataModifica: new Date().toLocaleString()
+});
+
+prodotto.scadenza = nuovaData;
+
     const parti = nuovaData.split("/");
 
 const dataScad = new Date(
@@ -214,5 +227,26 @@ document.querySelector(".totale").innerHTML =
 }
 
 function mostraStorico(codice){
-    alert("Storico in costruzione");
+
+    const storico = storicoModifiche[codice];
+
+    if(!storico || storico.length === 0){
+        alert("Nessuna modifica registrata");
+        return;
+    }
+
+    let testo = "";
+
+    storico.forEach((s,i)=>{
+        testo +=
+        (i+1) + ") " +
+        s.vecchia +
+        " → " +
+        s.nuova +
+        "\n" +
+        s.dataModifica +
+        "\n\n";
+    });
+
+    alert(testo);
 }
