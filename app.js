@@ -17,6 +17,7 @@ function mostraProdotti(lista) {
             <p><strong>Prodotto:</strong> ${p.descrizione}</p>
             <p><strong>Scadenza:</strong> ${p.scadenza}</p>
             <p><strong>Giorni:</strong> ${p.giorni}</p>
+            <h1>TEST PULSANTE</h1>
             <button onclick="modificaScadenza('${p.codice}')">
 ✏️ Modifica Scadenza
 </button>
