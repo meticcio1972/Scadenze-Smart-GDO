@@ -31,7 +31,12 @@ document.getElementById("csvFile").addEventListener("change", function(e){
 
     reader.onload = function(event){
    alert("PASSO 1");
-const testo = event.target.result.replace(/\r/g,"");
+const testo = String(event.target.result);
+alert("LUNGHEZZA FILE: " + testo.length);
+
+const righe = testo.replace(/\r/g,"").split("\n");
+
+alert("RIGHE: " + righe.length);
 alert("PASSO 2");
 const righe = testo.split("\n");
 alert("RIGHE: " + righe.length);
