@@ -36,9 +36,7 @@ alert("LUNGHEZZA FILE: " + testo.length);
 
 const righe = testo.replace(/\r\n|\n|\r/);
 
-alert("RIGHE: " + righe.length);
-alert("PASSO 2");
-const righe = testo.split("\n");
+
 alert("RIGHE: " + righe.length);
         prodotti = [];
 
