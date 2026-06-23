@@ -1,6 +1,6 @@
 alert("APP JS CARICATO");
 let prodotti = [];
-
+let storicoModifiche = {};
 function mostraProdotti(lista) {
 
     const contenuto = document.getElementById("contenuto");
