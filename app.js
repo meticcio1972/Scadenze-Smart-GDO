@@ -1,6 +1,8 @@
 alert("APP JS CARICATO");
 let prodotti = [];
-let storicoModifiche = {};
+let storicoModifiche =
+JSON.parse(localStorage.getItem("storicoModifiche")) || {};
+
 let scadenzeModificate =
 JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
 
@@ -175,7 +177,10 @@ storicoModifiche[codice].push({
     nuova: nuovaData,
     dataModifica: new Date().toLocaleString()
 });
-
+localStorage.setItem(
+    "storicoModifiche",
+    JSON.stringify(storicoModifiche)
+);
 prodotto.scadenza = nuovaData;
     scadenzeModificate[codice] = nuovaData;
 
