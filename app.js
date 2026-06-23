@@ -34,7 +34,7 @@ document.getElementById("csvFile").addEventListener("change", function(e){
 const testo = String(event.target.result);
 alert("LUNGHEZZA FILE: " + testo.length);
 
-const righe = testo.replace(/\r\n|\n|\r/");
+const righe = testo.replace(/\r\n|\n|\r/);
 
 alert("RIGHE: " + righe.length);
 alert("PASSO 2");
