@@ -8,6 +8,8 @@ JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
 
 function mostraProdotti(lista) {
 
+    prodottiVisualizzati = lista;
+
     const contenuto = document.getElementById("contenuto");
 
     contenuto.innerHTML = lista.map(p => `
@@ -152,6 +154,7 @@ document.querySelector(".g15").onclick = function(){
 
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
+    let prodottiVisualizzati = [];
 };
 function modificaScadenza(codice){
    
@@ -268,4 +271,47 @@ function mostraStorico(codice){
     });
 
     alert(testo);
+}
+function esportaVisualizzati(){
+
+    if(prodottiVisualizzati.length === 0){
+        alert("Nessun prodotto da esportare");
+        return;
+    }
+
+    let csv =
+    "Codice;Prodotto;Scadenza;Giorni\n";
+
+    prodottiVisualizzati.forEach(p => {
+
+        csv +=
+        p.codice + ";" +
+        p.descrizione + ";" +
+        p.scadenza + ";" +
+        p.giorni + "\n";
+
+    });
+
+    const blob = new Blob(
+        [csv],
+        {
+            type:"text/csv;charset=utf-8;"
+        }
+    );
+
+    const link =
+    document.createElement("a");
+
+    link.href =
+    URL.createObjectURL(blob);
+
+    link.download =
+    "Scadenze_GDO.csv";
+
+    link.click();
+
+    alert(
+        prodottiVisualizzati.length +
+        " prodotti esportati"
+    );
 }
