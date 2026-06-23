@@ -248,7 +248,7 @@ document.querySelector(".totale").innerHTML =
 function mostraStorico(codice){
 
     const storico = storicoModifiche[codice];
-
+   alert(JSON.stringify(storicoModifiche));
     if(!storico || storico.length === 0){
         alert("Nessuna modifica registrata");
         return;
