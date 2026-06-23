@@ -17,6 +17,13 @@ function mostraProdotti(lista) {
             <p><strong>Prodotto:</strong> ${p.descrizione}</p>
             <p><strong>Scadenza:</strong> ${p.scadenza}</p>
             <p><strong>Giorni:</strong> ${p.giorni}</p>
+            <button onclick="modificaScadenza('${p.codice}')">
+✏️ Modifica Scadenza
+</button>
+
+<button onclick="mostraStorico('${p.codice}')">
+📜 Storico
+</button>
         </div>
     `).join("");
 }
