@@ -172,7 +172,7 @@ prodotto.giorni = Math.ceil(
     (dataScad - oggi) /
     (1000*60*60*24)
 );
-
+alert("Nuovi giorni: " + prodotto.giorni);
     alert("Scadenza aggiornata!");
     let scaduti = 0;
 let g3 = 0;
