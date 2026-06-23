@@ -66,7 +66,7 @@ alert("RIGHE: " + righe.length);
             if(colonne.length < 3) continue;
             const codice = colonne[0].trim();
             const descrizione = colonne[1].trim();
-            const dataStr = colonne[2].trim();
+            
             let dataStr = colonne[2].trim();
 
 if(scadenzeModificate[codice]){
