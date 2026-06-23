@@ -143,3 +143,26 @@ document.querySelector(".g15").onclick = function(){
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
 };
+function modificaScadenza(codice){
+
+    const prodotto = prodotti.find(p => p.codice === codice);
+
+    if(!prodotto) return;
+
+    const nuovaData = prompt(
+        "Inserisci nuova data (gg/mm/aaaa)",
+        prodotto.scadenza
+    );
+
+    if(!nuovaData) return;
+
+    prodotto.scadenza = nuovaData;
+
+    alert("Scadenza aggiornata!");
+
+    mostraProdotti(prodotti);
+}
+
+function mostraStorico(codice){
+    alert("Storico in costruzione");
+}
