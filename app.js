@@ -144,7 +144,7 @@ document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
 };
 function modificaScadenza(codice){
-
+   alert("FUNZIONA");
     const prodotto = prodotti.find(p => p.codice === codice);
 
     if(!prodotto) return;
