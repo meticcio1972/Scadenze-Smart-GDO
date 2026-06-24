@@ -286,7 +286,47 @@ function mostraStorico(codice){
     alert(testo);
 }
 function esportaVisualizzati(){
+let offerte =
+JSON.parse(localStorage.getItem("offerte")) || [];
+
 function mettiInOfferta(codice){
+
+    const prodotto =
+    prodotti.find(p => p.codice === codice);
+
+    if(!prodotto){
+        alert("Prodotto non trovato");
+        return;
+    }
+
+    const pezzi = prompt(
+        "Quanti pezzi metti in offerta?",
+        "1"
+    );
+
+    if(!pezzi) return;
+
+    offerte.push({
+        codice: prodotto.codice,
+        descrizione: prodotto.descrizione,
+        scadenza: prodotto.scadenza,
+        pezzi: pezzi,
+        data: new Date().toLocaleString()
+    });
+
+    localStorage.setItem(
+        "offerte",
+        JSON.stringify(offerte)
+    );
+
+    document.querySelector(".offerta").innerHTML =
+        "🔵 Offerta<br><strong>" +
+        offerte.length +
+        "</strong>";
+
+    alert("Prodotto inserito in offerta");
+}
+
 
     const prodotto =
     prodotti.find(p => p.codice === codice);
