@@ -393,7 +393,7 @@ document.querySelector(".offerta").onclick = function(){
     `).join("");
 
 };
-};
+
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
 };
