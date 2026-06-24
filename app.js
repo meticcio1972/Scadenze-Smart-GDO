@@ -325,7 +325,6 @@ function mettiInOfferta(codice){
 function esportaVisualizzati(){
 
   
-}
     if(prodottiVisualizzati.length === 0){
         alert("Nessun prodotto da esportare");
         return;
