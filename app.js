@@ -323,7 +323,7 @@ function mettiInOfferta(codice){
     alert("Prodotto inserito in offerta");
 }
 function esportaVisualizzati(){
-
+alert("Da esportare: " + prodottiVisualizzati.length);
   
     if(prodottiVisualizzati.length === 0){
         alert("Nessun prodotto da esportare");
