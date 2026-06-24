@@ -370,14 +370,7 @@ document.querySelector(".offerta").onclick = function(){
 
     prodottiVisualizzati = offerte;
 
-    mostraProdotti(
-        offerte.map(o => ({
-            codice: o.codice,
-            descrizione: o.descrizione,
-            scadenza: o.scadenza,
-            giorni: "-"
-        }))
-    );
+    alert("Offerte trovate: " + offerte.length);
 
 };
 document.querySelector(".totale").onclick = function(){
