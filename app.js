@@ -368,6 +368,21 @@ function esportaVisualizzati(){
 }
 document.querySelector(".offerta").onclick = function(){
 
+    prodottiVisualizzati = offerte;
+
+    mostraProdotti(
+        offerte.map(o => ({
+            codice: o.codice,
+            descrizione: o.descrizione,
+            scadenza: o.scadenza,
+            giorni: "-"
+        }))
+    );
+
+};
+document.querySelector(".totale").onclick = function(){
+    mostraProdotti(prodotti);
+};
     const contenuto =
     document.getElementById("contenuto");
 
