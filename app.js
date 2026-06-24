@@ -370,8 +370,29 @@ document.querySelector(".offerta").onclick = function(){
 
     prodottiVisualizzati = offerte;
 
-    alert("Offerte trovate: " + offerte.length);
+   
 
+    contenuto.innerHTML = offerte.map(o => `
+
+        <div style="
+            background:white;
+            padding:15px;
+            margin:10px 0;
+            border-radius:10px;
+            box-shadow:0 2px 5px rgba(0,0,0,.15);
+        ">
+
+            <p><strong>Codice:</strong> ${o.codice}</p>
+            <p><strong>Prodotto:</strong> ${o.descrizione}</p>
+            <p><strong>Scadenza:</strong> ${o.scadenza}</p>
+            <p><strong>Pezzi:</strong> ${o.pezzi}</p>
+            <p><strong>Inserito il:</strong> ${o.data}</p>
+
+        </div>
+
+    `).join("");
+
+};
 };
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
