@@ -15,9 +15,11 @@ function mostraProdotti(lista) {
 
     prodottiVisualizzati = lista;
 
-    const contenuto = document.getElementById("contenuto");
+    const contenuto =
+    document.getElementById("contenuto");
 
     contenuto.innerHTML = lista.map(p => `
+
         <div style="
             background:white;
             padding:15px;
@@ -25,24 +27,30 @@ function mostraProdotti(lista) {
             border-radius:10px;
             box-shadow:0 2px 5px rgba(0,0,0,.15);
         ">
+
             <p><strong>Codice:</strong> ${p.codice}</p>
             <p><strong>Prodotto:</strong> ${p.descrizione}</p>
             <p><strong>Scadenza:</strong> ${p.scadenza}</p>
             <p><strong>Giorni:</strong> ${p.giorni}</p>
-            <h1>TEST PULSANTE</h1>
-            <button onclick="modificaScadenza('${p.codice}')">
-✏️ Modifica Scadenza
-</button>
 
-<button onclick="mostraStorico('${p.codice}')">
-📜 Storico
-</button>
-<button onclick="mettiInOfferta('${p.codice}')">
-🏷️ Offerta
-</button>
+            <button onclick="modificaScadenza('${p.codice}')">
+                ✏️ Modifica Scadenza
+            </button>
+
+            <button onclick="mostraStorico('${p.codice}')">
+                📜 Storico
+            </button>
+
+            <button onclick="mettiInOfferta('${p.codice}')">
+                🏷️ Offerta
+            </button>
+
         </div>
+
     `).join("");
 }
+   
+
 
 document.getElementById("csvFile").addEventListener("change", function(e){
 
@@ -397,44 +405,7 @@ document.querySelector(".offerta").onclick = function(){
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
 };
-    const contenuto =
-    document.getElementById("contenuto");
-
-    if(offerte.length === 0){
-        contenuto.innerHTML =
-        "<h2>Nessun prodotto in offerta</h2>";
-        return;
-    }
-
-    contenuto.innerHTML = offerte.map(o => `
-
-        <div style="
-            background:white;
-            padding:15px;
-            margin:10px 0;
-            border-radius:10px;
-            box-shadow:0 2px 5px rgba(0,0,0,.15);
-        ">
-
-            <p><strong>Codice:</strong> ${o.codice}</p>
-
-            <p><strong>Prodotto:</strong>
-            ${o.descrizione}</p>
-
-            <p><strong>Scadenza:</strong>
-            ${o.scadenza}</p>
-
-            <p><strong>Pezzi:</strong>
-            ${o.pezzi}</p>
-
-            <p><strong>Inserito il:</strong>
-            ${o.data}</p>
-
-        </div>
-
-    `).join("");
-
-};
+    
 function aggiornaContatoreOfferte(){
 
     document.querySelector(".offerta").innerHTML =
