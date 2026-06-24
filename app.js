@@ -3,6 +3,7 @@ setTimeout(() => {
     aggiornaContatoreOfferte();
 },500);
 let prodotti = [];
+let prodottiVisualizzati = [];
 let storicoModifiche =
 JSON.parse(localStorage.getItem("storicoModifiche")) || {};
 
