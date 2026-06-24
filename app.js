@@ -162,8 +162,7 @@ document.querySelector(".g15").onclick = function(){
 
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
-    let prodottiVisualizzati = [];
-};
+   };
 function modificaScadenza(codice){
    
     const prodotto = prodotti.find(p => p.codice === codice);
@@ -286,10 +285,6 @@ function mostraStorico(codice){
 
     alert(testo);
 }
-function esportaVisualizzati(){
-let offerte =
-JSON.parse(localStorage.getItem("offerte")) || [];
-
 function mettiInOfferta(codice){
 
     const prodotto =
@@ -327,38 +322,9 @@ function mettiInOfferta(codice){
 
     alert("Prodotto inserito in offerta");
 }
+function esportaVisualizzati(){
 
-
-    const prodotto =
-    prodotti.find(p => p.codice === codice);
-
-    if(!prodotto) return;
-
-    const pezzi = prompt(
-        "Quanti pezzi vanno in offerta?",
-        "1"
-    );
-
-    if(!pezzi) return;
-
-    offerte.push({
-
-        codice: prodotto.codice,
-        descrizione: prodotto.descrizione,
-        scadenza: prodotto.scadenza,
-        pezzi: pezzi,
-        data: new Date().toLocaleString()
-
-    });
-
-    localStorage.setItem(
-        "offerte",
-        JSON.stringify(offerte)
-    );
-
-    alert("Prodotto inserito in offerta");
-
-    aggiornaContatoreOfferte();
+  
 }
     if(prodottiVisualizzati.length === 0){
         alert("Nessun prodotto da esportare");
