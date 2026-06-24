@@ -1,11 +1,15 @@
 alert("APP JS CARICATO");
+setTimeout(() => {
+    aggiornaContatoreOfferte();
+},500);
 let prodotti = [];
 let storicoModifiche =
 JSON.parse(localStorage.getItem("storicoModifiche")) || {};
 
 let scadenzeModificate =
 JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
-
+let offerte =
+JSON.parse(localStorage.getItem("offerte")) || [];
 function mostraProdotti(lista) {
 
     prodottiVisualizzati = lista;
@@ -31,6 +35,9 @@ function mostraProdotti(lista) {
 
 <button onclick="mostraStorico('${p.codice}')">
 📜 Storico
+</button>
+<button onclick="mettiInOfferta('${p.codice}')">
+🏷️ Offerta
 </button>
         </div>
     `).join("");
@@ -162,6 +169,11 @@ function modificaScadenza(codice){
 
     if(!prodotto) return;
 
+    const pezzi = prompt(
+    "Quanti pezzi hai trovato?",
+    "1"
+);
+
     const nuovaData = prompt(
         "Inserisci nuova data (gg/mm/aaaa)",
         prodotto.scadenza
@@ -178,6 +190,7 @@ if(!storicoModifiche[codice]){
 storicoModifiche[codice].push({
     vecchia: vecchiaData,
     nuova: nuovaData,
+    pezzi: pezzi,
     dataModifica: new Date().toLocaleString()
 });
 localStorage.setItem(
@@ -273,7 +286,39 @@ function mostraStorico(codice){
     alert(testo);
 }
 function esportaVisualizzati(){
+function mettiInOfferta(codice){
 
+    const prodotto =
+    prodotti.find(p => p.codice === codice);
+
+    if(!prodotto) return;
+
+    const pezzi = prompt(
+        "Quanti pezzi vanno in offerta?",
+        "1"
+    );
+
+    if(!pezzi) return;
+
+    offerte.push({
+
+        codice: prodotto.codice,
+        descrizione: prodotto.descrizione,
+        scadenza: prodotto.scadenza,
+        pezzi: pezzi,
+        data: new Date().toLocaleString()
+
+    });
+
+    localStorage.setItem(
+        "offerte",
+        JSON.stringify(offerte)
+    );
+
+    alert("Prodotto inserito in offerta");
+
+    aggiornaContatoreOfferte();
+}
     if(prodottiVisualizzati.length === 0){
         alert("Nessun prodotto da esportare");
         return;
@@ -314,4 +359,12 @@ function esportaVisualizzati(){
         prodottiVisualizzati.length +
         " prodotti esportati"
     );
+}
+function aggiornaContatoreOfferte(){
+
+    document.querySelector(".offerta").innerHTML =
+    "🔵 Offerta<br><strong>" +
+    offerte.length +
+    "</strong>";
+
 }
