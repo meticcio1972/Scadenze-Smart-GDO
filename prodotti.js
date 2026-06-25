@@ -39,6 +39,6 @@ function mostraProdotti(lista){
 
         </div>
 
-    `).join("");
+    }).join("");
 
 }
