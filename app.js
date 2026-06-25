@@ -5,6 +5,10 @@ setTimeout(() => {
 let prodotti = 
     
 JSON.parse(localStorage.getItem("prodotti")) || [];
+if (prodotti.length > 0) {
+    mostraProdotti(prodotti);
+    aggiornaDashboard();
+}
 let prodottiVisualizzati = [];
 
     document.querySelector(".totale").innerHTML =
