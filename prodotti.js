@@ -1,21 +1,34 @@
-// ===== PRODOTTI =====
+// ===============================
+// PRODOTTI.JS
+// Visualizzazione prodotti
+// ===============================
 
-function mostraProdotti(lista){
+function mostraProdotti(lista) {
 
     prodottiVisualizzati = lista;
 
-    const contenuto =
-    document.getElementById("contenuto");
+    const contenuto = document.getElementById("contenuto");
+
+    if (lista.length === 0) {
+
+        contenuto.innerHTML = `
+            <div style="
+                background:white;
+                padding:20px;
+                border-radius:12px;
+                text-align:center;
+                font-size:18px;
+            ">
+                Nessun prodotto trovato
+            </div>
+        `;
+
+        return;
+    }
 
     contenuto.innerHTML = lista.map(p => `
 
-        <div style="
-            background:white;
-            padding:15px;
-            margin:10px 0;
-            border-radius:10px;
-            box-shadow:0 2px 5px rgba(0,0,0,.15);
-        ">
+        <div class="prodotto">
 
             <p><strong>Codice:</strong> ${p.codice}</p>
 
@@ -26,7 +39,7 @@ function mostraProdotti(lista){
             <p><strong>Giorni:</strong> ${p.giorni}</p>
 
             <button onclick="modificaScadenza('${p.codice}')">
-                ✏️ Modifica Scadenza
+                ✏️ Modifica
             </button>
 
             <button onclick="mostraStorico('${p.codice}')">
@@ -34,11 +47,11 @@ function mostraProdotti(lista){
             </button>
 
             <button onclick="mettiInOfferta('${p.codice}')">
-                🏷️ Offerta
+                🏷 Offerta
             </button>
 
         </div>
 
-    }).join("");
+    `).join("");
 
 }
