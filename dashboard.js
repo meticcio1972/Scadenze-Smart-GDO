@@ -1,7 +1,9 @@
+// ===============================
+// DASHBOARD.JS
+// Aggiornamento contatori
+// ===============================
 
-// ===== DASHBOARD =====
-
-function aggiornaDashboard(){
+function aggiornaDashboard() {
 
     let scaduti = 0;
     let g3 = 0;
@@ -11,11 +13,20 @@ function aggiornaDashboard(){
 
     prodotti.forEach(p => {
 
-        if(p.giorni < 0) scaduti++;
-        else if(p.giorni <= 3) g3++;
-        else if(p.giorni <= 7) g7++;
-        else if(p.giorni <= 10) g10++;
-        else if(p.giorni <= 15) g15++;
+        if (p.giorni < 0)
+            scaduti++;
+
+        else if (p.giorni <= 3)
+            g3++;
+
+        else if (p.giorni <= 7)
+            g7++;
+
+        else if (p.giorni <= 10)
+            g10++;
+
+        else if (p.giorni <= 15)
+            g15++;
 
     });
 
@@ -34,9 +45,11 @@ function aggiornaDashboard(){
     document.querySelector(".g15").innerHTML =
         "🟢 Entro 15 giorni<br><strong>" + g15 + "</strong>";
 
+    document.querySelector(".offerta").innerHTML =
+        "🔵 Offerta<br><strong>" + offerte.length + "</strong>";
+
     document.querySelector(".totale").innerHTML =
         "📦 Totale Referenze<br><strong>" +
         prodotti.length +
         "</strong>";
-
 }
