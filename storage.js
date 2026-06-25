@@ -1,43 +1,54 @@
 
-// ===== STORAGE =====
+// ===============================
+// STORAGE.JS
+// Gestione dati dell'app
+// ===============================
 
+// Archivio prodotti
 var prodotti =
 JSON.parse(localStorage.getItem("prodotti")) || [];
 
-var prodottiVisualizzati = [];
+// Lista visualizzata
+var prodottiVisualizzati = [...prodotti];
 
+// Storico modifiche
 var storicoModifiche =
 JSON.parse(localStorage.getItem("storicoModifiche")) || {};
 
+// Scadenze modificate
 var scadenzeModificate =
 JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
 
+// Offerte
 var offerte =
 JSON.parse(localStorage.getItem("offerte")) || [];
 
+// ===============================
+// Salvataggi
+// ===============================
 
-function salvaProdotti(){
+function salvaProdotti() {
     localStorage.setItem(
         "prodotti",
         JSON.stringify(prodotti)
     );
 }
 
-function salvaStorico(){
+function salvaStorico() {
     localStorage.setItem(
         "storicoModifiche",
         JSON.stringify(storicoModifiche)
     );
 }
 
-function salvaScadenze(){
+function salvaScadenze() {
     localStorage.setItem(
         "scadenzeModificate",
         JSON.stringify(scadenzeModificate)
     );
 }
 
-function salvaOfferte(){
+function salvaOfferte() {
     localStorage.setItem(
         "offerte",
         JSON.stringify(offerte)
