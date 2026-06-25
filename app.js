@@ -11,7 +11,7 @@ let prodottiVisualizzati = [];
         "📦 Totale Referenze<br><strong>" +
         prodotti.length +
         "</strong>";
-}                               
+                               
 let storicoModifiche =
 JSON.parse(localStorage.getItem("storicoModifiche")) || {};
 
