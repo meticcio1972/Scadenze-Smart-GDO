@@ -415,7 +415,9 @@ document.getElementById("contenuto");
 };
 
 document.querySelector(".totale").onclick = function(){
-    mostraProdotti(prodotti);
+    if(prodotti.length > 0){
+
+   mostraProdotti(prodotti);
 };
     
 function aggiornaContatoreOfferte(){
@@ -426,6 +428,4 @@ function aggiornaContatoreOfferte(){
     "</strong>";
 
 }
- if(prodotti.length > 0){
-
-    mostraProdotti(prodotti);
+ 
