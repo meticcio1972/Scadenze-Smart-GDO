@@ -1,18 +1,18 @@
 
 // ===== STORAGE =====
 
-let prodotti =
+var prodotti =
 JSON.parse(localStorage.getItem("prodotti")) || [];
 
-let prodottiVisualizzati = [];
+var prodottiVisualizzati = [];
 
-let storicoModifiche =
+var storicoModifiche =
 JSON.parse(localStorage.getItem("storicoModifiche")) || {};
 
-let scadenzeModificate =
+var scadenzeModificate =
 JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
 
-let offerte =
+var offerte =
 JSON.parse(localStorage.getItem("offerte")) || [];
 
 
