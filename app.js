@@ -2,13 +2,10 @@ alert("APP JS CARICATO");
 setTimeout(() => {
     aggiornaContatoreOfferte();
 },500);
-let prodotti = [];
+let prodotti = 
 
 JSON.parse(localStorage.getItem("prodotti")) || [];
-let prodottiVisualizzati = 
- if(prodotti.length > 0){
-
-    mostraProdotti(prodotti);
+let prodottiVisualizzati = [];
 
     document.querySelector(".totale").innerHTML =
         "📦 Totale Referenze<br><strong>" +
@@ -389,7 +386,8 @@ alert("Da esportare: " + prodottiVisualizzati.length);
     );
 }
 document.querySelector(".offerta").onclick = function(){
-
+const contenuto =
+document.getElementById("contenuto");
     prodottiVisualizzati = offerte;
 
    
@@ -428,3 +426,6 @@ function aggiornaContatoreOfferte(){
     "</strong>";
 
 }
+ if(prodotti.length > 0){
+
+    mostraProdotti(prodotti);
