@@ -3,7 +3,17 @@ setTimeout(() => {
     aggiornaContatoreOfferte();
 },500);
 let prodotti = [];
-let prodottiVisualizzati = [];
+let prodottiVisualizzati = 
+JSON.parse(localStorage.getItem("prodotti)) || [];
+ if(prodotti.length > 0){
+
+    mostraProdotti(prodotti);
+
+    document.querySelector(".totale").innerHTML =
+        "📦 Totale Referenze<br><strong>" +
+        prodotti.length +
+        "</strong>";
+}                               
 let storicoModifiche =
 JSON.parse(localStorage.getItem("storicoModifiche")) || {};
 
@@ -141,7 +151,10 @@ if(scadenzeModificate[codice]){
             "📦 Totale Referenze<br><strong>" +
             prodotti.length +
             "</strong>";
-
+        localStorage.setItem(
+            "prodotti"
+            JSON.stringify(prodotti)
+        );
         mostraProdotti(prodotti);
     };
 
