@@ -3,8 +3,9 @@ setTimeout(() => {
     aggiornaContatoreOfferte();
 },500);
 let prodotti = [];
+
+JSON.parse(localStorage.getItem("prodotti")) || [];
 let prodottiVisualizzati = 
-JSON.parse(localStorage.getItem("prodotti)) || [];
  if(prodotti.length > 0){
 
     mostraProdotti(prodotti);
@@ -152,7 +153,7 @@ if(scadenzeModificate[codice]){
             prodotti.length +
             "</strong>";
         localStorage.setItem(
-            "prodotti"
+            "prodotti",
             JSON.stringify(prodotti)
         );
         mostraProdotti(prodotti);
