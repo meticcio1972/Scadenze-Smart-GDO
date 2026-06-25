@@ -6,6 +6,7 @@
 document.getElementById("csvFile").addEventListener("change", importaCSV);
 
 function importaCSV(e) {
+    alert("Funzione importaCSV avviata");
 
     const file = e.target.files[0];
 
@@ -14,6 +15,7 @@ function importaCSV(e) {
     const reader = new FileReader();
 
     reader.onload = function(event) {
+        alert("File letto");
 
         const testo = event.target.result;
 
