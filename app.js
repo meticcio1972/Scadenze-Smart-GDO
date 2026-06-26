@@ -2,27 +2,7 @@ alert("APP JS CARICATO");
 setTimeout(() => {
     aggiornaContatoreOfferte();
 },500);
-let prodotti = 
-    
-JSON.parse(localStorage.getItem("prodotti")) || [];
-if (prodotti.length > 0) {
-    mostraProdotti(prodotti);
-    aggiornaDashboard();
-}
-let prodottiVisualizzati = [];
 
-    document.querySelector(".totale").innerHTML =
-        "📦 Totale Referenze<br><strong>" +
-        prodotti.length +
-        "</strong>";
-                               
-let storicoModifiche =
-JSON.parse(localStorage.getItem("storicoModifiche")) || {};
-
-let scadenzeModificate =
-JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
-let offerte =
-JSON.parse(localStorage.getItem("offerte")) || [];
 function mostraProdotti(lista) {
 
     prodottiVisualizzati = lista;
