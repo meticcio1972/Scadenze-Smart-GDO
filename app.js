@@ -398,13 +398,7 @@ document.getElementById("contenuto");
 
 };
 
-document.querySelector(".totale").onclick = function(){
-    if(prodotti.length > 0){
 
-   mostraProdotti(prodotti);
-      }
-      
-    };
     
 function aggiornaContatoreOfferte(){
 
