@@ -1,4 +1,13 @@
 alert("APP JS CARICATO");
+let prodotti =
+JSON.parse(localStorage.getItem("prodotti")) || [];
+
+let prodottiVisualizzati = prodotti;
+
+if (prodotti.length > 0) {
+    mostraProdotti(prodotti);
+}
+aggiornaDashboard();
 setTimeout(() => {
     aggiornaContatoreOfferte();
 },500);
