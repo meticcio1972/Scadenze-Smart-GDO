@@ -1,5 +1,20 @@
 alert("APP JS CARICATO");
- 
+let repartoAttivo =
+localStorage.getItem("repartoAttivo") || "macelleria";
+document.getElementById("reparto").value = repartoAttivo;
+
+document.getElementById("reparto").onchange = function () {
+
+    repartoAttivo = this.value;
+
+    localStorage.setItem(
+        "repartoAttivo",
+        repartoAttivo
+    );
+
+    location.reload();
+
+};
 if (prodotti.length > 0) {
     mostraProdotti(prodotti);
 }
