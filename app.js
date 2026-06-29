@@ -146,6 +146,8 @@ if(scadenzeModificate[codice]){
             "prodotti",
             JSON.stringify(prodotti)
         );
+        console.log("SALVATO", prodotti.length);
+console.log(localStorage.getItem("prodotti"))
         mostraProdotti(prodotti);
     };
 
