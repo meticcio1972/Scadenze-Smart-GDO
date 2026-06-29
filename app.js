@@ -236,6 +236,9 @@ prodotto.giorni = Math.ceil(
 );
 alert("Nuovi giorni: " + prodotto.giorni);
     alert("Scadenza aggiornata!");
+    salvaProdotti();
+mostraProdotti(prodotti);
+aggiornaDashboard();
     let scaduti = 0;
 let g3 = 0;
 let g7 = 0;
