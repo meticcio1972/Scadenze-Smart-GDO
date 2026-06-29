@@ -1,5 +1,5 @@
 alert("APP JS CARICATO");
-let prodotti =
+ prodotti =
 JSON.parse(localStorage.getItem("prodotti")) || [];
 
 let prodottiVisualizzati = prodotti;
