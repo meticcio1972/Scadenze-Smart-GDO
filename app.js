@@ -1,9 +1,5 @@
 alert("APP JS CARICATO");
- prodotti =
-JSON.parse(localStorage.getItem("prodotti")) || [];
-
-let prodottiVisualizzati = prodotti;
-
+ 
 if (prodotti.length > 0) {
     mostraProdotti(prodotti);
 }
