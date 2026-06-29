@@ -50,4 +50,11 @@ alert("Nuovi giorni: " + prodotto.giorni);
     alert("Scadenza aggiornata!");
  aggiornaDashboard();
  mostraProdotti(prodotti);  
+   aggiornaDashboard();
+mostraProdotti(prodotti);
+
+localStorage.setItem(
+    "prodotti",
+    JSON.stringify(prodotti)
+);
 }
