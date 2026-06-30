@@ -248,7 +248,9 @@ localStorage.setItem(
 );
 prodotto.scadenza = nuovaData;
     scadenzeModificate[codice] = nuovaData;
+alert("Prima del salvataggio");
 await salvaProdotti();
+alert("Dopo il salvataggio");
 mostraProdotti(prodotti);localStorage.setItem(
     "scadenzeModificate",
     JSON.stringify(scadenzeModificate)
