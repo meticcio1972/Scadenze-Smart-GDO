@@ -229,8 +229,7 @@ mostraProdotti(prodotti);localStorage.setItem(
     "scadenzeModificate",
     JSON.stringify(scadenzeModificate)
 );
-
-    const parti = nuovaData.split("/");
+const parti = nuovaData.split("/");
 
 const dataScad = new Date(
     parti[2],
@@ -245,6 +244,9 @@ prodotto.giorni = Math.ceil(
     (dataScad - oggi) /
     (1000*60*60*24)
 );
+
+
+    
 alert("Nuovi giorni: " + prodotto.giorni);
     alert("Scadenza aggiornata!");
    
