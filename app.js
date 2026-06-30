@@ -207,7 +207,7 @@ document.querySelector(".g10").onclick = function(){
 
 document.querySelector(".g15").onclick = function(){
     mostraProdotti(prodotti.filter(p => p.giorni > 10 && p.giorni <= 15));
-};
+}; 
 
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
