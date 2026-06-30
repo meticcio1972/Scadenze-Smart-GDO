@@ -16,6 +16,30 @@ document.getElementById("reparto").onchange = function () {
 
 };
 if (prodotti.length > 0) {
+    prodotti.forEach(p => {
+
+    if (scadenzeModificate[p.codice]) {
+
+        p.scadenza = scadenzeModificate[p.codice];
+
+        const parti = p.scadenza.split("/");
+
+        const dataScad = new Date(
+            parti[2],
+            parti[1]-1,
+            parti[0]
+        );
+
+        const oggi = new Date();
+        oggi.setHours(0,0,0,0);
+
+        p.giorni = Math.ceil(
+            (dataScad - oggi) /
+            (1000*60*60*24)
+        );
+    }
+
+});
     mostraProdotti(prodotti);
 }
 aggiornaDashboard();
