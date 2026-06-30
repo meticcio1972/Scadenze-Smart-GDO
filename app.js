@@ -457,4 +457,27 @@ function aggiornaContatoreOfferte(){
     "</strong>";
 
 }
- 
+ async function salvaProdotti() {
+
+    for (const p of prodotti) {
+
+        const { error } = await supabase
+            .from("prodotti")
+            .upsert({
+                codice: p.codice,
+                descrizione: p.descrizione,
+                scadenza: p.scadenza,
+                giorni: p.giorni,
+                reparto: repartoAttivo,
+                offerta: false
+            });
+
+        if (error) {
+            console.error(error);
+            alert("Errore salvataggio Supabase");
+            return;
+        }
+    }
+
+    console.log("Prodotti salvati su Supabase");
+}
