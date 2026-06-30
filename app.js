@@ -483,10 +483,10 @@ alert("Reparto: " + repartoAttivo);
 });
 
         if (error) {
-            console.error(error);
-            alert("Errore salvataggio Supabase");
-            return;
-        }
+    console.error(error);
+    alert(JSON.stringify(error));
+    return;
+}
     }
 
     console.log("Prodotti salvati su Supabase");
