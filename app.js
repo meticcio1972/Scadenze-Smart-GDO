@@ -230,6 +230,9 @@ async function modificaScadenza(codice){
 
     if(!nuovaData) return;
 
+alert("Sono arrivato qui");
+
+
     const vecchiaData = prodotto.scadenza;
 
 if(!storicoModifiche[codice]){
