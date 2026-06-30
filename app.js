@@ -212,7 +212,7 @@ document.querySelector(".g15").onclick = function(){
 document.querySelector(".totale").onclick = function(){
     mostraProdotti(prodotti);
    };
-function modificaScadenza(codice){
+async function modificaScadenza(codice){
    
     const prodotto = prodotti.find(p => p.codice === codice);
 
@@ -248,7 +248,7 @@ localStorage.setItem(
 );
 prodotto.scadenza = nuovaData;
     scadenzeModificate[codice] = nuovaData;
-salvaProdotti();
+await salvaProdotti();
 mostraProdotti(prodotti);localStorage.setItem(
     "scadenzeModificate",
     JSON.stringify(scadenzeModificate)
