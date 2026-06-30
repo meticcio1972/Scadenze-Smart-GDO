@@ -468,7 +468,8 @@ alert("Prodotti da salvare: " + prodotti.length);
 
     for (const p of prodotti) {
 
-        const { error } = await supabase
+        alert(JSON.stringify(p));
+alert("Reparto: " + repartoAttivo);
             .from("prodotti")
  .upsert({
     codice: p.codice,
