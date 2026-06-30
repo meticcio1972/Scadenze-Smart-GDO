@@ -463,14 +463,16 @@ function aggiornaContatoreOfferte(){
 
         const { error } = await supabase
             .from("prodotti")
-            .upsert({
-                codice: p.codice,
-                descrizione: p.descrizione,
-                scadenza: p.scadenza,
-                giorni: p.giorni,
-                reparto: repartoAttivo,
-                offerta: false
-            });
+ .upsert({
+    codice: p.codice,
+    descrizione: p.descrizione,
+    scadenza: p.scadenza,
+    giorni: p.giorni,
+    reparto: repartoAttivo,
+    offerta: false
+}, {
+    onConflict: "codice"
+});
 
         if (error) {
             console.error(error);
