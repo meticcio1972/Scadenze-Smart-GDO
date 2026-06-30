@@ -458,6 +458,8 @@ function aggiornaContatoreOfferte(){
 
 }
  async function salvaProdotti() {
+     console.log("Prodotti da salvare:", prodotti);
+alert("Prodotti da salvare: " + prodotti.length);
 
     for (const p of prodotti) {
 
