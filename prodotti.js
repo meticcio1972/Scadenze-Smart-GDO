@@ -5,6 +5,8 @@
 
 "use strict";
 
+let prodotti = [];
+
 const Prodotti = {
 
     lista: [],
