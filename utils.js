@@ -81,3 +81,25 @@ const Utils = {
     }
 
 };
+,
+
+    calcolaGiorni(dataString){
+
+        return this.giorniAllaScadenza(dataString);
+
+    },
+
+    clona(oggetto){
+
+        return this.clonaOggetto(oggetto);
+
+    },
+
+    generaId(){
+
+        return "ID-" +
+            Date.now() +
+            "-" +
+            Math.random().toString(36).substring(2,8);
+
+    }
