@@ -73,9 +73,9 @@ if (dataModificata) {
                 scadenza,
                 giorni
             });
-
+        alert("E");
         }
-
+        alert("F");
         console.log(prodotti);
 alert("Prodotti letti: " + prodotti.length);
 
