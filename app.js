@@ -19,11 +19,20 @@ const App = {
 
             await Supabase.inizializza();
 
+            // Attiva tutti gli eventi
+            Eventi.inizializza();
+
+            // Aggiorna dashboard
             Dashboard.aggiorna();
 
+            // Mostra Home
             UI.home();
 
-            AI.briefing();
+            // Chiude il loading
+            UI.chiudiCaricamento();
+
+            // Briefing AI
+            console.log(AI.briefing());
 
             Registro.registraEvento({
 
@@ -33,7 +42,9 @@ const App = {
 
                 livello: "SUCCESS",
 
-                stato: "OK"
+                stato: "OK",
+
+                note: "Applicazione avviata"
 
             });
 
@@ -49,11 +60,17 @@ const App = {
 
             );
 
-            Notifiche.errore(
+            console.error(errore);
 
-                "Errore durante l'avvio"
+            if (typeof Notifiche !== "undefined") {
 
-            );
+                Notifiche.errore(
+
+                    "Errore durante l'avvio"
+
+                );
+
+            }
 
         }
 
