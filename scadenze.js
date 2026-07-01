@@ -1,59 +1,44 @@
-function modificaScadenza(codice){
-   
-    const prodotto = prodotti.find(p => p.codice === codice);
+// ============================================
+// SCADENZE SMART GDO 2.0
+// dashboard.js
+// ============================================
 
-    if(!prodotto) return;
+"use strict";
 
-    const pezzi = prompt(
-    "Quanti pezzi hai trovato?",
-    "1"
-);
+const Dashboard = {
 
-    const nuovaData = prompt(
-        "Inserisci nuova data (gg/mm/aaaa)",
-        prodotto.scadenza
-    );
+    aggiorna() {
 
-    if(!nuovaData) return;
+        document.querySelector(".scaduti").innerHTML =
+            "⚫ Scaduti<br><strong>" +
+            Prodotti.scaduti().length +
+            "</strong>";
 
-    const vecchiaData = prodotto.scadenza;
+        document.querySelector(".g3").innerHTML =
+            "🔴 Entro 3 giorni<br><strong>" +
+            Prodotti.filtra(0,3).length +
+            "</strong>";
 
-if(!storicoModifiche[codice]){
-    storicoModifiche[codice] = [];
-}
+        document.querySelector(".g7").innerHTML =
+            "🟠 Entro 7 giorni<br><strong>" +
+            Prodotti.filtra(4,7).length +
+            "</strong>";
 
-storicoModifiche[codice].push({
-    vecchia: vecchiaData,
-    nuova: nuovaData,
-    pezzi: pezzi,
-    dataModifica: new Date().toLocaleString()
-});
-salvaStorico();
-prodotto.scadenza = nuovaData;
-    scadenzeModificate[codice] = nuovaData;
+        document.querySelector(".g10").innerHTML =
+            "🟡 Entro 10 giorni<br><strong>" +
+            Prodotti.filtra(8,10).length +
+            "</strong>";
 
-salvaScadenze();
+        document.querySelector(".g15").innerHTML =
+            "🟢 Entro 15 giorni<br><strong>" +
+            Prodotti.filtra(11,15).length +
+            "</strong>";
 
-    const parti = nuovaData.split("/");
+        document.querySelector(".totale").innerHTML =
+            "📦 Totale Referenze<br><strong>" +
+            Prodotti.totale() +
+            "</strong>";
 
-const dataScad = new Date(
-    parti[2],
-    parti[1]-1,
-    parti[0]
-);
+    }
 
-const oggi = new Date();
-oggi.setHours(0,0,0,0);
-prodotto.giorni = calcolaGiorni(nuovaData);
-
-alert("Nuovi giorni: " + prodotto.giorni);
-    alert("Scadenza aggiornata!");
- aggiornaDashboard();
- mostraProdotti(prodotti);  
-   
-
-localStorage.setItem(
-    "prodotti",
-    JSON.stringify(prodotti)
-);
-}
+};
