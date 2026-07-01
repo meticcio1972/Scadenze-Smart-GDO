@@ -1,57 +1,180 @@
-// ===============================
-// PRODOTTI.JS
-// Visualizzazione prodotti
-// ===============================
+// ============================================
+// SCADENZE SMART GDO 2.0
+// prodotti.js
+// ============================================
 
-function mostraProdotti(lista) {
+"use strict";
 
-    prodottiVisualizzati = lista;
+const Prodotti = {
 
-    const contenuto = document.getElementById("contenuto");
+    lista: [],
 
-    if (lista.length === 0) {
+    // ==========================
+    // CARICA
+    // ==========================
 
-        contenuto.innerHTML = `
-            <div style="
-                background:white;
-                padding:20px;
-                border-radius:12px;
-                text-align:center;
-                font-size:18px;
-            ">
-                Nessun prodotto trovato
-            </div>
-        `;
+    carica(lista = []) {
 
-        return;
+        this.lista = Utils.clona(lista);
+
+        this.aggiornaGiorni();
+
+    },
+
+    // ==========================
+    // RESTITUISCE TUTTI
+    // ==========================
+
+    tutti() {
+
+        return this.lista;
+
+    },
+
+    // ==========================
+    // CERCA PER CODICE
+    // ==========================
+
+    trova(codice) {
+
+        return this.lista.find(
+
+            p => p.codice === codice
+
+        );
+
+    },
+
+    // ==========================
+    // AGGIUNGI
+    // ==========================
+
+    aggiungi(prodotto) {
+
+        this.lista.push(prodotto);
+
+    },
+
+    // ==========================
+    // ELIMINA
+    // ==========================
+
+    elimina(codice) {
+
+        this.lista = this.lista.filter(
+
+            p => p.codice !== codice
+
+        );
+
+    },
+
+    // ==========================
+    // MODIFICA SCADENZA
+    // ==========================
+
+    modificaScadenza(codice, nuovaData) {
+
+        const prodotto =
+
+            this.trova(codice);
+
+        if (!prodotto) return false;
+
+        prodotto.scadenza = nuovaData;
+
+        prodotto.giorni =
+
+            Utils.giorniAllaScadenza(
+
+                nuovaData
+
+            );
+
+        return true;
+
+    },
+
+    // ==========================
+    // AGGIORNA GIORNI
+    // ==========================
+
+    aggiornaGiorni() {
+
+        this.lista.forEach(prodotto => {
+
+            prodotto.giorni =
+
+                Utils.giorniAllaScadenza(
+
+                    prodotto.scadenza
+
+                );
+
+        });
+
+    },
+
+    // ==========================
+    // FILTRO GIORNI
+    // ==========================
+
+    filtra(min, max) {
+
+        return this.lista.filter(p =>
+
+            p.giorni >= min &&
+
+            p.giorni <= max
+
+        );
+
+    },
+
+    // ==========================
+    // SCADUTI
+    // ==========================
+
+    scaduti() {
+
+        return this.lista.filter(
+
+            p => p.giorni < 0
+
+        );
+
+    },
+
+    // ==========================
+    // CERCA
+    // ==========================
+
+    cerca(testo) {
+
+        testo = testo.toLowerCase();
+
+        return this.lista.filter(p =>
+
+            p.codice.includes(testo) ||
+
+            p.descrizione
+
+                .toLowerCase()
+
+                .includes(testo)
+
+        );
+
+    },
+
+    // ==========================
+    // TOTALE
+    // ==========================
+
+    totale() {
+
+        return this.lista.length;
+
     }
 
-    contenuto.innerHTML = lista.map(p => `
-
-        <div class="prodotto">
-
-            <p><strong>Codice:</strong> ${p.codice}</p>
-
-            <p><strong>Prodotto:</strong> ${p.descrizione}</p>
-
-            <p><strong>Scadenza:</strong> ${p.scadenza}</p>
-
-            <p><strong>Giorni:</strong> ${p.giorni}</p>
-
-            <button onclick="modificaScadenza('${p.codice}')">
-                ✏️ Modifica
-            </button>
-
-            <button onclick="mostraStorico('${p.codice}')">
-                📜 Storico
-            </button>
-
-            <button onclick="mettiInOfferta('${p.codice}')">
-                🏷 Offerta
-            </button>
-
-        </div>
-
-    `).join("");
-
-}
+};
