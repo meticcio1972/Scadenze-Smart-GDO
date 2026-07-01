@@ -34,12 +34,20 @@ function importaCSV(e) {
 
             if(colonne.length < 3) continue;
 
-            const codice = colonne[0].trim();
-            const descrizione = colonne[1].trim();
+          alert("A");
 
-            let scadenza = colonne[2].trim();
+const codice = colonne[0].trim();
+const descrizione = colonne[1].trim();
 
-            const dataModificata = leggiScadenza(codice);
+alert("B");
+
+let scadenza = colonne[2].trim();
+
+alert("C");
+
+const dataModificata = leggiScadenza(codice);
+
+alert("D");
 
 if (dataModificata) {
     scadenza = dataModificata;
