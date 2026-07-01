@@ -1,55 +1,44 @@
-// ===============================
-// DASHBOARD.JS
-// Aggiornamento contatori
-// ===============================
+// ============================================
+// SCADENZE SMART GDO 2.0
+// dashboard.js
+// ============================================
 
-function aggiornaDashboard() {
+"use strict";
 
-    let scaduti = 0;
-    let g3 = 0;
-    let g7 = 0;
-    let g10 = 0;
-    let g15 = 0;
+const Dashboard = {
 
-    prodotti.forEach(p => {
+    aggiorna() {
 
-        if (p.giorni < 0)
-            scaduti++;
+        document.querySelector(".scaduti").innerHTML =
+            "⚫ Scaduti<br><strong>" +
+            Prodotti.scaduti().length +
+            "</strong>";
 
-        else if (p.giorni <= 3)
-            g3++;
+        document.querySelector(".g3").innerHTML =
+            "🔴 Entro 3 giorni<br><strong>" +
+            Prodotti.filtra(0,3).length +
+            "</strong>";
 
-        else if (p.giorni <= 7)
-            g7++;
+        document.querySelector(".g7").innerHTML =
+            "🟠 Entro 7 giorni<br><strong>" +
+            Prodotti.filtra(4,7).length +
+            "</strong>";
 
-        else if (p.giorni <= 10)
-            g10++;
+        document.querySelector(".g10").innerHTML =
+            "🟡 Entro 10 giorni<br><strong>" +
+            Prodotti.filtra(8,10).length +
+            "</strong>";
 
-        else if (p.giorni <= 15)
-            g15++;
+        document.querySelector(".g15").innerHTML =
+            "🟢 Entro 15 giorni<br><strong>" +
+            Prodotti.filtra(11,15).length +
+            "</strong>";
 
-    });
+        document.querySelector(".totale").innerHTML =
+            "📦 Totale Referenze<br><strong>" +
+            Prodotti.totale() +
+            "</strong>";
 
-    document.querySelector(".scaduti").innerHTML =
-        "⚫ Scaduti<br><strong>" + scaduti + "</strong>";
+    }
 
-    document.querySelector(".g3").innerHTML =
-        "🔴 Entro 3 giorni<br><strong>" + g3 + "</strong>";
-
-    document.querySelector(".g7").innerHTML =
-        "🟠 Entro 7 giorni<br><strong>" + g7 + "</strong>";
-
-    document.querySelector(".g10").innerHTML =
-        "🟡 Entro 10 giorni<br><strong>" + g10 + "</strong>";
-
-    document.querySelector(".g15").innerHTML =
-        "🟢 Entro 15 giorni<br><strong>" + g15 + "</strong>";
-
-    document.querySelector(".offerta").innerHTML =
-        "🔵 Offerta<br><strong>" + offerte.length + "</strong>";
-
-    document.querySelector(".totale").innerHTML =
-        "📦 Totale Referenze<br><strong>" +
-        prodotti.length +
-        "</strong>";
-}
+};
