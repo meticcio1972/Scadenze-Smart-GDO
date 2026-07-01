@@ -1,56 +1,135 @@
+// ============================================
+// SCADENZE SMART GDO 2.0
+// storage.js
+// ============================================
 
-// ===============================
-// STORAGE.JS
-// Gestione dati dell'app
-// ===============================
+"use strict";
 
-// Archivio prodotti
-var prodotti =
-JSON.parse(localStorage.getItem("prodotti")) || [];
+const Storage = {
 
-// Lista visualizzata
-var prodottiVisualizzati = [...prodotti];
+    // ==========================
+    // PRODOTTI
+    // ==========================
 
-// Storico modifiche
-var storicoModifiche =
-JSON.parse(localStorage.getItem("storicoModifiche")) || {};
+    salvaProdotti() {
 
-// Scadenze modificate
-var scadenzeModificate =
-JSON.parse(localStorage.getItem("scadenzeModificate")) || {};
+        localStorage.setItem(
+            "prodotti",
+            JSON.stringify(
+                Prodotti.tutti()
+            )
+        );
 
-// Offerte
-var offerte =
-JSON.parse(localStorage.getItem("offerte")) || [];
+    },
 
-// ===============================
-// Salvataggi
-// ===============================
+    caricaProdotti() {
 
-function salvaProdotti() {
-    localStorage.setItem(
-        "prodotti",
-        JSON.stringify(prodotti)
-    );
-}
+        const dati =
+            localStorage.getItem("prodotti");
 
-function salvaStorico() {
-    localStorage.setItem(
-        "storicoModifiche",
-        JSON.stringify(storicoModifiche)
-    );
-}
+        if (!dati) return [];
 
-function salvaScadenze() {
-    localStorage.setItem(
-        "scadenzeModificate",
-        JSON.stringify(scadenzeModificate)
-    );
-}
+        return JSON.parse(dati);
 
-function salvaOfferte() {
-    localStorage.setItem(
-        "offerte",
-        JSON.stringify(offerte)
-    );
-}
+    },
+
+    // ==========================
+    // SCADENZE MODIFICATE
+    // ==========================
+
+    salvaScadenze(scadenze) {
+
+        localStorage.setItem(
+            "scadenzeModificate",
+            JSON.stringify(scadenze)
+        );
+
+    },
+
+    caricaScadenze() {
+
+        const dati =
+            localStorage.getItem(
+                "scadenzeModificate"
+            );
+
+        return dati
+            ? JSON.parse(dati)
+            : {};
+
+    },
+
+    // ==========================
+    // STORICO
+    // ==========================
+
+    salvaStorico(storico) {
+
+        localStorage.setItem(
+            "storicoModifiche",
+            JSON.stringify(storico)
+        );
+
+    },
+
+    caricaStorico() {
+
+        const dati =
+            localStorage.getItem(
+                "storicoModifiche"
+            );
+
+        return dati
+            ? JSON.parse(dati)
+            : {};
+
+    },
+
+    // ==========================
+    // OFFERTE
+    // ==========================
+
+    salvaOfferte(offerte) {
+
+        localStorage.setItem(
+            "offerte",
+            JSON.stringify(offerte)
+        );
+
+    },
+
+    caricaOfferte() {
+
+        const dati =
+            localStorage.getItem(
+                "offerte"
+            );
+
+        return dati
+            ? JSON.parse(dati)
+            : [];
+
+    },
+
+    // ==========================
+    // REPARTO
+    // ==========================
+
+    salvaReparto(reparto) {
+
+        localStorage.setItem(
+            "repartoAttivo",
+            reparto
+        );
+
+    },
+
+    caricaReparto() {
+
+        return localStorage.getItem(
+            "repartoAttivo"
+        ) || "macelleria";
+
+    }
+
+};
