@@ -67,7 +67,8 @@ function importaCSV(e) {
 
         }
 
-        salvaProdotti();
+        console.log(prodotti);
+alert("Prodotti letti: " + prodotti.length);
 
         mostraProdotti(prodotti);
 
