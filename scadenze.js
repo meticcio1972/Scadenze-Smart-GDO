@@ -5,8 +5,7 @@
 
 "use strict";
 
-let scadenzeModificate = Storage.caricaScadenze();
-
+let scadenzeModificate = Storage.caricaScadenze() || {};
 // ==========================
 // AGGIORNA SCADENZA
 // ==========================
