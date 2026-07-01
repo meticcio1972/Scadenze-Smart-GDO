@@ -1,90 +1,118 @@
-// ===============================
-// CSV.JS
-// Importazione CSV
-// ===============================
+// ============================================
+// SCADENZE SMART GDO 2.0
+// csv.js
+// ============================================
 
-document.getElementById("csvFile").addEventListener("change", importaCSV);
+"use strict";
 
-function importaCSV(e) {
-    alert("Funzione importaCSV avviata");
+const CSV = {
 
-    const file = e.target.files[0];
+    importa(file) {
 
-    if (!file) return;
+        if (!file) return;
 
-    const reader = new FileReader();
+        const reader = new FileReader();
 
-    reader.onload = function(event) {
-        alert("File letto");
+        reader.onload = (evento) => {
 
-        const testo = event.target.result;
+            try {
 
-        const righe = testo.split(/\r\n|\n|\r/);
+                const testo = evento.target.result;
 
-        prodotti = [];
+                const righe = testo.split(/\r\n|\n|\r/);
 
-        const oggi = new Date();
-        oggi.setHours(0,0,0,0);
+                const prodotti = [];
 
-        for(let i = 1; i < righe.length; i++) {
+                for (let i = 1; i < righe.length; i++) {
 
-            if(righe[i].trim() === "") continue;
+                    if (!righe[i].trim()) continue;
 
-            const colonne = righe[i].split(/\t|;|,/);
+                    const colonne = righe[i].split(/\t|;|,/);
 
-            if(colonne.length < 3) continue;
+                    if (colonne.length < 3) continue;
 
-          alert("A");
+                    const codice = colonne[0].trim();
 
-const codice = colonne[0].trim();
-const descrizione = colonne[1].trim();
+                    const descrizione = colonne[1].trim();
 
-alert("B");
+                    let scadenza = colonne[2].trim();
 
-let scadenza = colonne[2].trim();
+                    const dataModificata = leggiScadenza(codice);
 
-alert("C");
+                    if (dataModificata) {
 
-const dataModificata = null;
+                        scadenza = dataModificata;
 
-alert("D");
+                    }
 
-if (dataModificata) {
-    scadenza = dataModificata;
-}
-            const parti = scadenza.split("/");
+                    const giorni = Utils.calcolaGiorni(scadenza);
 
-            if(parti.length !== 3) continue;
+                    prodotti.push({
 
-            const dataScadenza = new Date(
-                parti[2],
-                parti[1]-1,
-                parti[0]
-            );
+                        codice,
 
-            const giorni = Math.ceil(
-                (dataScadenza - oggi) /
-                (1000*60*60*24)
-            );
+                        descrizione,
 
-            prodotti.push({
-                codice,
-                descrizione,
-                scadenza,
-                giorni
-            });
-        alert("E");
-        }
-        alert("F");
-        console.log(prodotti);
-alert("Prodotti letti: " + prodotti.length);
+                        scadenza,
 
-        mostraProdotti(prodotti);
+                        giorni
 
-        aggiornaDashboard();
+                    });
 
-    };
+                }
 
-    reader.readAsText(file);
+                Prodotti.carica(prodotti);
 
-}
+                Storage.salvaProdotti(prodotti);
+
+                Sessione.aggiornaImport(prodotti.length);
+
+                Registro.registraEvento({
+
+                    categoria: "CSV",
+
+                    operazione: "IMPORTAZIONE",
+
+                    livello: "SUCCESS",
+
+                    stato: "OK",
+
+                    note: `${prodotti.length} prodotti importati`
+
+                });
+
+                Dashboard.aggiorna();
+
+                Notifiche.successo(
+
+                    `${prodotti.length} prodotti importati`
+
+                );
+
+            }
+
+            catch (errore) {
+
+                Registro.registraErrore(
+
+                    errore,
+
+                    "CSV"
+
+                );
+
+                Notifiche.errore(
+
+                    "Errore durante l'importazione CSV"
+
+                );
+
+            }
+
+        };
+
+        reader.readAsText(file);
+
+    }
+
+};
