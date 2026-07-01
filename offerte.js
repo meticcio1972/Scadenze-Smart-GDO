@@ -1,60 +1,186 @@
-// ===== OFFERTE =====
+// ============================================
+// SCADENZE SMART GDO 2.0
+// offerte.js
+// ============================================
 
-function mettiInOfferta(codice) {
+"use strict";
 
-    const prodotto = prodotti.find(p => p.codice === codice);
+const Offerte = {
 
-    if (!prodotto) {
-        alert("Prodotto non trovato");
-        return;
+    lista: [],
+
+    // ==========================
+    // CARICA
+    // ==========================
+
+    carica(lista = []) {
+
+        this.lista = Utils.clona(lista);
+
+    },
+
+    // ==========================
+    // TUTTE
+    // ==========================
+
+    tutte() {
+
+        return this.lista;
+
+    },
+
+    // ==========================
+    // AGGIUNGI
+    // ==========================
+
+    aggiungi(offerta = {}) {
+
+        const record = {
+
+            id: Utils.generaId(),
+
+            codice: "",
+
+            descrizione: "",
+
+            reparto: "",
+
+            prezzoNormale: 0,
+
+            prezzoOfferta: 0,
+
+            sconto: 0,
+
+            quantita: 0,
+
+            dataCreazione: new Date().toLocaleString(),
+
+            dataInizio: "",
+
+            dataFine: "",
+
+            operatore: "",
+
+            puntoVendita: "",
+
+            priorita: "NORMALE",
+
+            stato: "ATTIVA",
+
+            note: "",
+
+            ...offerta
+
+        };
+
+        this.lista.unshift(record);
+
+        Registro.registraEvento({
+
+            categoria: "OFFERTE",
+
+            operazione: "NUOVA OFFERTA",
+
+            livello: "SUCCESS",
+
+            codice: record.codice,
+
+            descrizione: record.descrizione,
+
+            reparto: record.reparto,
+
+            note: "Offerta inserita"
+
+        });
+
+    },
+
+    // ==========================
+    // CERCA
+    // ==========================
+
+    cerca(codice) {
+
+        return this.lista.find(
+
+            o => o.codice === codice
+
+        );
+
+    },
+
+    // ==========================
+    // ELIMINA
+    // ==========================
+
+    elimina(id) {
+
+        this.lista = this.lista.filter(
+
+            o => o.id !== id
+
+        );
+
+    },
+
+    // ==========================
+    // ATTIVE
+    // ==========================
+
+    attive() {
+
+        return this.lista.filter(
+
+            o => o.stato === "ATTIVA"
+
+        );
+
+    },
+
+    // ==========================
+    // SCADUTE
+    // ==========================
+
+    scadute() {
+
+        return this.lista.filter(
+
+            o => o.stato === "SCADUTA"
+
+        );
+
+    },
+
+    // ==========================
+    // TOTALI
+    // ==========================
+
+    totale() {
+
+        return this.lista.length;
+
+    },
+
+    totaleAttive() {
+
+        return this.attive().length;
+
+    },
+
+    totaleScadute() {
+
+        return this.scadute().length;
+
+    },
+
+    // ==========================
+    // SVUOTA
+    // ==========================
+
+    svuota() {
+
+        this.lista = [];
+
     }
 
-    const pezzi = prompt("Quanti pezzi metti in offerta?", "1");
-
-    if (pezzi === null) return;
-
-    offerte.push({
-        codice: prodotto.codice,
-        descrizione: prodotto.descrizione,
-        scadenza: prodotto.scadenza,
-        pezzi: pezzi,
-        data: new Date().toLocaleString()
-    });
-
-    localStorage.setItem("offerte", JSON.stringify(offerte));
-
-    aggiornaContatoreOfferte();
-
-    alert("Prodotto inserito in offerta");
-}
-
-function esportaVisualizzati() {
-
-    if (prodottiVisualizzati.length === 0) {
-        alert("Nessun prodotto da esportare");
-        return;
-    }
-
-    let csv = "Codice;Descrizione;Scadenza;Giorni\n";
-
-    prodottiVisualizzati.forEach(p => {
-        csv += `${p.codice};${p.descrizione};${p.scadenza};${p.giorni}\n`;
-    });
-
-    const blob = new Blob([csv], {
-        type: "text/csv;charset=utf-8;"
-    });
-
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "categoria.csv";
-    link.click();
-}
-
-function aggiornaContatoreOfferte() {
-
-    document.querySelector(".offerta").innerHTML =
-        "🔵 Offerta<br><strong>" +
-        offerte.length +
-        "</strong>";
-}
+};
