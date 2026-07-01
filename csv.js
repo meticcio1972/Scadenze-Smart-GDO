@@ -39,10 +39,11 @@ function importaCSV(e) {
 
             let scadenza = colonne[2].trim();
 
-            if(scadenzeModificate[codice]){
-                scadenza = scadenzeModificate[codice];
-            }
+            const dataModificata = leggiScadenza(codice);
 
+if (dataModificata) {
+    scadenza = dataModificata;
+}
             const parti = scadenza.split("/");
 
             if(parti.length !== 3) continue;
