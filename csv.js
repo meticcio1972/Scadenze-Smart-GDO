@@ -45,7 +45,7 @@ let scadenza = colonne[2].trim();
 
 alert("C");
 
-const dataModificata = leggiScadenza(codice);
+const dataModificata = null;
 
 alert("D");
 
